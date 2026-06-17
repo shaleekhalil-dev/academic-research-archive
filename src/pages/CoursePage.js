@@ -64,19 +64,26 @@ export default function CoursePage({ lang }) {
       <div className="list-container">
         {course.items.map((item) => (
           <div key={item.id} className="list-item" style={{ flexDirection: lang === 'en' ? 'row-reverse' : 'row' }}>
-            <div className="item-info" style={{ flexDirection: lang === 'en' ? 'row-reverse' : 'row', textDirection: 'rtl' }}>
-              <FileText size={20} style={{ color: '#475569', flexShrink: 0 }} />
-              <div style={{ minWidth: 0, flex: 1, textAlign: 'right' }}>
-                <div className="item-title" title={item.title}>{item.title}</div>
-                <div style={{ marginTop: '0.25rem', display: 'flex', justifyContent: lang === 'en' ? 'flex-end' : 'flex-start' }}>
+            <div className="item-info" style={{ flexDirection: lang === 'en' ? 'row-reverse' : 'row' }}>
+              <FileText size={24} style={{ color: '#475569', flexShrink: 0, marginTop: item.subtitle ? '0.25rem' : '0' }} />
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <div className="item-title" title={item.title} style={{ whiteSpace: 'normal', overflow: 'visible', fontSize: '1rem', fontWeight: '600' }}>
+                  {item.title}
+                </div>
+                {item.subtitle && (
+                  <div style={{ fontSize: '0.875rem', color: '#64748b', marginTop: '0.25rem', fontWeight: '400' }}>
+                    {item.subtitle}
+                  </div>
+                )}
+                <div style={{ marginTop: '0.5rem', display: 'flex', justifyContent: lang === 'en' ? 'flex-end' : 'flex-start' }}>
                   <span className={getBadgeClass(item.type)}>{getTypeText(item.type)}</span>
                 </div>
               </div>
             </div>
             <div>
               <a 
-                href={`${course.folderPath}${item.title}`} 
-                download={item.title} 
+                href={`${course.folderPath}${item.fileName}`} 
+                download={item.fileName} 
                 className="btn-download"
                 style={{ flexDirection: lang === 'en' ? 'row-reverse' : 'row' }}
               >
